@@ -8,45 +8,58 @@
 </head>
 
 <body>
-    <h1>Minha Rotina</h1>
-    <a href="{{ url_for('adicionar') }}" class="btn">Adicionar Tarefa</a>
-
-    <div class="calendario">
-        {% for mes, info in calendario.items() %}
-        <div class="mes">
-            {% set meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-            'Outubro', 'Novembro', 'Dezembro'] %}
-            <h2>{{ meses[info.mes_num - 1] }} {{ info.ano }}</h2>
-            <div class="grade-calendario">
-
-                <div class="dia-semana">Seg</div>
-                <div class="dia-semana">Ter</div>
-                <div class="dia-semana">Qua</div>
-                <div class="dia-semana">Qui</div>
-                <div class="dia-semana">Sex</div>
-                <div class="dia-semana">Sáb</div>
-                <div class="dia-semana">Dom</div>
-
-                {% for i in range(info.primeiro_dia_semana) %}
-                <div class="dia-vazio"></div>
-                {% endfor %}
-
-                {% for dia, tarefas_do_dia in info.dias.items() %}
-                <div class="dia" onclick='abrirModal("{{ dia }}", {{ tarefas_do_dia|tojson|safe }})'>
-                    <span class="numero-dia">{{ dia[8:10] }}</span>
-                    <div class="tarefas-preview">
-                        {% if tarefas_do_dia %}
-                        <span class="contador-tarefas">{{ tarefas_do_dia|length }} tarefa{{ 's' if tarefas_do_dia|length
-                            > 1 else '' }}</span>
-                        {% endif %}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
+    <!-- Menu Lateral -->
+    <div class="menu-lateral">
+        <h2>Rotina</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}" class="ativo">Calendário</a></li>
+            <li><a href="{{ url_for('adicionar') }}">Adicionar Tarefa</a></li>
+            <!-- Espaço para opções futuras -->
+            <li><a href="#">Opção Futura 1</a></li>
+            <li><a href="#">Opção Futura 2</a></li>
+        </ul>
     </div>
 
+    <!-- Conteúdo Principal -->
+    <div class="conteudo">
+        <h1>Minha Rotina</h1>
+        <div class="calendario">
+            {% for mes, info in calendario.items() %}
+            <div class="mes">
+                {% set meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
+                'Setembro', 'Outubro', 'Novembro', 'Dezembro'] %}
+                <h2>{{ meses[info.mes_num - 1] }} {{ info.ano }}</h2>
+                <div class="grade-calendario">
+                    <div class="dia-semana">Seg</div>
+                    <div class="dia-semana">Ter</div>
+                    <div class="dia-semana">Qua</div>
+                    <div class="dia-semana">Qui</div>
+                    <div class="dia-semana">Sex</div>
+                    <div class="dia-semana">Sáb</div>
+                    <div class="dia-semana">Dom</div>
+
+                    {% for i in range(info.primeiro_dia_semana) %}
+                    <div class="dia-vazio"></div>
+                    {% endfor %}
+
+                    {% for dia, tarefas_do_dia in info.dias.items() %}
+                    <div class="dia" onclick='abrirModal("{{ dia }}", {{ tarefas_do_dia|tojson|safe }})'>
+                        <span class="numero-dia">{{ dia[8:10] }}</span>
+                        <div class="tarefas-preview">
+                            {% if tarefas_do_dia %}
+                            <span class="contador-tarefas">{{ tarefas_do_dia|length }} tarefa{{ 's' if
+                                tarefas_do_dia|length > 1 else '' }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-conteudo">
             <span class="fechar" onclick="fecharModal()">×</span>
@@ -57,15 +70,13 @@
 
     <script>
         function abrirModal(dia, tarefas) {
-            console.log("Dia:", dia); // Depuração
-            console.log("Tarefas:", tarefas); // Depuração
+            console.log("Dia:", dia);
+            console.log("Tarefas:", tarefas);
             const modal = document.getElementById("modal");
             const titulo = document.getElementById("modal-titulo");
             const conteudo = document.getElementById("modal-tarefas");
 
-
             const dataBr = dia.split('-').reverse().join('/');
-
             titulo.innerText = `Tarefas de ${dataBr}`;
             conteudo.innerHTML = '';
 

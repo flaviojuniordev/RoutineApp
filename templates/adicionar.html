@@ -8,20 +8,36 @@
 </head>
 
 <body>
-    <h1>Adicionar Nova Tarefa</h1>
-    <form method="POST">
-        <label for="nome">Nome da Tarefa:</label>
-        <input type="text" id="nome" name="nome" required>
-        <br>
-        <label for="data">Data:</label>
-        <input type="date" id="data" name="data" required>
-        <br>
-        <label for="hora">Horário:</label>
-        <input type="time" id="hora" name="hora" required>
-        <br>
-        <button type="submit">Adicionar</button>
-    </form>
-    <a href="{{ url_for('index') }}" class="btn">Voltar</a>
+    <!-- Menu Lateral -->
+    <div class="menu-lateral">
+        <h2>Rotina</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Calendário</a></li>
+            <li><a href="{{ url_for('adicionar') }}" class="ativo">Adicionar Tarefa</a></li>
+            <li><a href="#">Opção Futura 1</a></li>
+            <li><a href="#">Opção Futura 2</a></li>
+        </ul>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="conteudo">
+        <h1>Adicionar Nova Tarefa</h1>
+        <form method="POST" class="form-adicionar">
+            <div class="form-grupo">
+                <label for="nome">Nome da Tarefa:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-grupo">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+            </div>
+            <div class="form-grupo">
+                <label for="hora">Horário:</label>
+                <input type="time" id="hora" name="hora" required>
+            </div>
+            <button type="submit" class="btn">Adicionar</button>
+        </form>
+    </div>
 </body>
 
 </html>
