@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Rotina</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Minha Rotina</h1>
+    <a href="{{ url_for('adicionar') }}" class="btn">Adicionar Tarefa</a>
+
+    <div class="calendario">
+        {% for mes, info in calendario.items() %}
+        <div class="mes">
+            {% set meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+            'Outubro', 'Novembro', 'Dezembro'] %}
+            <h2>{{ meses[info.mes_num - 1] }} {{ info.ano }}</h2>
+            <div class="grade-calendario">
+
+                <div class="dia-semana">Seg</div>
+                <div class="dia-semana">Ter</div>
+                <div class="dia-semana">Qua</div>
+                <div class="dia-semana">Qui</div>
+                <div class="dia-semana">Sex</div>
+                <div class="dia-semana">Sáb</div>
+                <div class="dia-semana">Dom</div>
+
+                {% for i in range(info.primeiro_dia_semana) %}
+                <div class="dia-vazio"></div>
+                {% endfor %}
+
+                {% for dia, tarefas_do_dia in info.dias.items() %}
+                <div class="dia" onclick='abrirModal("{{ dia }}", {{ tarefas_do_dia|tojson|safe }})'>
+                    <span class="numero-dia">{{ dia[8:10] }}</span>
+                    <div class="tarefas-preview">
+                        {% if tarefas_do_dia %}
+                        <span class="contador-tarefas">{{ tarefas_do_dia|length }} tarefa{{ 's' if tarefas_do_dia|length
+                            > 1 else '' }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-conteudo">
+            <span class="fechar" onclick="fecharModal()">×</span>
+            <h3 id="modal-titulo"></h3>
+            <div id="modal-tarefas"></div>
+        </div>
+    </div>
+
+    <script>
+        function abrirModal(dia, tarefas) {
+            console.log("Dia:", dia); // Depuração
+            console.log("Tarefas:", tarefas); // Depuração
+            const modal = document.getElementById("modal");
+            const titulo = document.getElementById("modal-titulo");
+            const conteudo = document.getElementById("modal-tarefas");
+
+
+            const dataBr = dia.split('-').reverse().join('/');
+
+            titulo.innerText = `Tarefas de ${dataBr}`;
+            conteudo.innerHTML = '';
+
+            if (!tarefas || tarefas.length === 0) {
+                conteudo.innerHTML = '<p>Sem tarefas para este dia.</p>';
+            } else {
+                tarefas.forEach(tarefa => {
+                    const card = document.createElement('div');
+                    card.className = `card ${tarefa.concluida ? 'concluida' : ''}`;
+                    card.innerHTML = `
+                        <h4>${tarefa.nome}</h4>
+                        <p>${tarefa.hora}</p>
+                        ${!tarefa.concluida ? `<a href="/concluir/${tarefa.indice}" class="btn-concluir">Concluir</a>` : ''}
+                    `;
+                    conteudo.appendChild(card);
+                });
+            }
+
+            modal.style.display = "block";
+        }
+
+        function fecharModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById("modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
