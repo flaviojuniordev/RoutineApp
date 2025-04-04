@@ -16,11 +16,43 @@
         "notas": "Finalizar pelo menos 50% do redhat"
     },
     {
-        "nome": "Atividade avaliativa SO",
+        "nome": "Acompanhamento RedHat",
         "data": "2025-04-08",
         "hora": "17:10",
         "concluida": false,
         "prioridade": "Alta",
-        "notas": "Atividade avaliativa "
-        }
-    ]
+        "notas": "Fazer 50% do redhat\r\n"
+    },
+    {
+        "nome": "Atividade avaliativa SO",
+        "data": "2025-04-09",
+        "hora": "17:10",
+        "concluida": false,
+        "prioridade": "Alta",
+        "notas": "atividade avaliativa, estudar "
+    },
+    {
+        "nome": "Aula de c\u00e1lculo 2",
+        "data": "2025-04-08",
+        "hora": "13:30",
+        "concluida": false,
+        "prioridade": "M\u00e9dia",
+        "notas": "Integra\u00e7\u00e3o por substitui\u00e7\u00e3o trigonom\u00e9trica."
+    },
+    {
+        "nome": "Revisar mat\u00e9ria de c\u00e1lculo 2 ",
+        "data": "2025-04-08",
+        "hora": "15:10",
+        "concluida": false,
+        "prioridade": "M\u00e9dia",
+        "notas": "Revisar a mat\u00e9ria de for\u00e7a e trabalho"
+    },
+    {
+        "nome": "Revisar mat\u00e9ria de Aed2 ",
+        "data": "2025-04-08",
+        "hora": "18:50",
+        "concluida": false,
+        "prioridade": "M\u00e9dia",
+        "notas": "Revisar o m\u00e9todo QuickSort"
+    }
+]

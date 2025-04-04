@@ -51,6 +51,12 @@ def organizar_tarefas(tarefas):
                 "notas": tarefa.get("notas", ""),
             }
         )
+
+    # Ordenar tarefas por horário em cada dia
+    for mes in calendario:
+        for dia in calendario[mes]["dias"]:
+            calendario[mes]["dias"][dia].sort(key=lambda x: x["hora"])
+
     return calendario
 
 
@@ -87,7 +93,6 @@ def adicionar():
 
         if repetir != "Não":
             data_inicial = datetime.strptime(data, "%Y-%m-%d")
-            nova_data = data_inicial  # Initialize nova_data with a default value
             for i in range(1, 30):
                 if repetir == "Diária":
                     nova_data = data_inicial + timedelta(days=i)

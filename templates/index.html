@@ -41,11 +41,13 @@
                     {% for dia, tarefas_do_dia in info.dias.items() %}
                     <div class="dia" data-dia="{{ dia }}" data-tarefas='{{ tarefas_do_dia|tojson|safe }}'>
                         <span class="numero-dia">{{ dia[8:10] }}</span>
-                        <div class="tarefas-preview">
-                            {% if tarefas_do_dia %}
-                            <span class="contador-tarefas">{{ tarefas_do_dia|length }} tarefa{{ 's' if
-                                tarefas_do_dia|length > 1 else '' }}</span>
-                            {% endif %}
+                        <div class="tarefas-lista">
+                            {% for tarefa in tarefas_do_dia %}
+                            <div class="tarefa-item prioridade-{{ tarefa.prioridade|lower }}">
+                                <span class="tarefa-nome">{{ tarefa.nome }}</span>
+                                <span class="tarefa-hora">{{ tarefa.hora }}</span>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     {% endfor %}

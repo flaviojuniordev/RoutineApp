@@ -109,19 +109,51 @@ h1 {
     text-align: center;
     font-weight: bold;
     margin-bottom: 5px;
+    font-size: 1em;
 }
 
-.tarefas-preview {
-    text-align: center;
+.tarefas-lista {
+    max-height: 75px;
+    /* Limita a altura para caber no quadrado */
+    overflow: hidden;
+}
+
+.tarefa-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 5px;
     font-size: 0.8em;
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+
+.tarefa-nome {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+}
+
+.tarefa-hora {
+    font-size: 0.75em;
     color: #555;
 }
 
-.contador-tarefas {
-    background-color: #007BFF;
-    color: white;
-    padding: 2px 5px;
-    border-radius: 3px;
+.prioridade-alta {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.prioridade-média {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.prioridade-baixa {
+    background-color: #d4edda;
+    color: #155724;
 }
 
 .card {
@@ -337,7 +369,6 @@ h1 {
     margin-top: 5px;
 }
 
-/* Estilos do Pomodoro */
 .pomodoro-container {
     background: #fff;
     padding: 30px;
