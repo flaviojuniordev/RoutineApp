@@ -8,19 +8,15 @@
 </head>
 
 <body>
-    <!-- Menu Lateral -->
     <div class="menu-lateral">
         <h2>Rotina</h2>
         <ul>
             <li><a href="{{ url_for('index') }}" class="ativo">Calendário</a></li>
             <li><a href="{{ url_for('adicionar') }}">Adicionar Tarefa</a></li>
-            <!-- Espaço para opções futuras -->
-            <li><a href="#">Opção Futura 1</a></li>
-            <li><a href="#">Opção Futura 2</a></li>
+            <li><a href="{{ url_for('pomodoro') }}">Pomodoro</a></li>
         </ul>
     </div>
 
-    <!-- Conteúdo Principal -->
     <div class="conteudo">
         <h1>Minha Rotina</h1>
         <div class="calendario">
@@ -43,7 +39,7 @@
                     {% endfor %}
 
                     {% for dia, tarefas_do_dia in info.dias.items() %}
-                    <div class="dia" onclick='abrirModal("{{ dia }}", {{ tarefas_do_dia|tojson|safe }})'>
+                    <div class="dia" data-dia="{{ dia }}" data-tarefas='{{ tarefas_do_dia|tojson|safe }}'>
                         <span class="numero-dia">{{ dia[8:10] }}</span>
                         <div class="tarefas-preview">
                             {% if tarefas_do_dia %}
@@ -59,7 +55,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-conteudo">
             <span class="fechar" onclick="fecharModal()">×</span>
@@ -68,47 +63,7 @@
         </div>
     </div>
 
-    <script>
-        function abrirModal(dia, tarefas) {
-            console.log("Dia:", dia);
-            console.log("Tarefas:", tarefas);
-            const modal = document.getElementById("modal");
-            const titulo = document.getElementById("modal-titulo");
-            const conteudo = document.getElementById("modal-tarefas");
-
-            const dataBr = dia.split('-').reverse().join('/');
-            titulo.innerText = `Tarefas de ${dataBr}`;
-            conteudo.innerHTML = '';
-
-            if (!tarefas || tarefas.length === 0) {
-                conteudo.innerHTML = '<p>Sem tarefas para este dia.</p>';
-            } else {
-                tarefas.forEach(tarefa => {
-                    const card = document.createElement('div');
-                    card.className = `card ${tarefa.concluida ? 'concluida' : ''}`;
-                    card.innerHTML = `
-                        <h4>${tarefa.nome}</h4>
-                        <p>${tarefa.hora}</p>
-                        ${!tarefa.concluida ? `<a href="/concluir/${tarefa.indice}" class="btn-concluir">Concluir</a>` : ''}
-                    `;
-                    conteudo.appendChild(card);
-                });
-            }
-
-            modal.style.display = "block";
-        }
-
-        function fecharModal() {
-            document.getElementById("modal").style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            const modal = document.getElementById("modal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

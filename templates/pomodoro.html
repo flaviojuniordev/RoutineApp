@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="menu-lateral">
+        <h2>Rotina</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Calendário</a></li>
+            <li><a href="{{ url_for('adicionar') }}">Adicionar Tarefa</a></li>
+            <li><a href="{{ url_for('pomodoro') }}" class="ativo">Pomodoro</a></li>
+        </ul>
+    </div>
+
+    <div class="conteudo">
+        <h1>Pomodoro</h1>
+        <div class="pomodoro-container">
+            <div id="timer" class="timer">25:00</div>
+            <div class="pomodoro-status">Trabalho</div>
+            <div class="pomodoro-controles">
+                <button id="btn-iniciar" class="btn">Iniciar</button>
+                <button id="btn-pausar" class="btn" disabled>Pausar</button>
+                <button id="btn-reiniciar" class="btn">Reiniciar</button>
+            </div>
+            <div class="ciclo-info">
+                Ciclo: <span id="ciclo">1</span> de 4
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

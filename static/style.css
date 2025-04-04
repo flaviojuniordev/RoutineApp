@@ -5,7 +5,6 @@ body {
     display: flex;
 }
 
-/* Menu Lateral */
 .menu-lateral {
     width: 250px;
     background-color: #343a40;
@@ -46,7 +45,6 @@ body {
     color: white;
 }
 
-/* Conteúdo Principal */
 .conteudo {
     margin-left: 250px;
     padding: 20px;
@@ -150,6 +148,12 @@ h1 {
     font-size: 0.8em;
 }
 
+.acoes {
+    margin-top: 5px;
+    display: flex;
+    gap: 5px;
+}
+
 .btn {
     display: inline-block;
     padding: 10px 15px;
@@ -166,49 +170,120 @@ h1 {
     background-color: #0056b3;
 }
 
+.btn.carregando {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
 .btn-concluir {
-    display: inline-block;
     padding: 5px 10px;
     background-color: #28a745;
     color: white;
-    text-decoration: none;
     border-radius: 5px;
     font-size: 0.8em;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-concluir:hover {
     background-color: #218838;
 }
 
-/* Formulário de Adicionar Tarefa */
-.form-adicionar {
-    background: #fff;
-    padding: 20px;
+.btn-editar {
+    padding: 5px 10px;
+    background-color: #ffc107;
+    color: #333;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-editar:hover {
+    background-color: #e0a800;
+}
+
+.btn-excluir {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-excluir:hover {
+    background-color: #c82333;
+}
+
+.btn-cancelar {
+    padding: 10px 15px;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancelar:hover {
+    background-color: #5a6268;
+}
+
+.form-adicionar,
+.form-editar {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
     margin: 20px auto;
 }
 
 .form-grupo {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-grupo label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: #333;
+    font-weight: 500;
 }
 
-.form-grupo input {
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 5px;
     box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s;
 }
 
-/* Modal */
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.form-grupo textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row>div {
+    flex: 1;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -242,4 +317,58 @@ h1 {
 .fechar:hover,
 .fechar:focus {
     color: #000;
+}
+
+.prioridade-alta {
+    border-left: 4px solid #dc3545;
+}
+
+.prioridade-média {
+    border-left: 4px solid #ffc107;
+}
+
+.prioridade-baixa {
+    border-left: 4px solid #28a745;
+}
+
+.notas {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Estilos do Pomodoro */
+.pomodoro-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.timer {
+    font-size: 3em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.pomodoro-status {
+    font-size: 1.2em;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+.pomodoro-controles {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.ciclo-info {
+    font-size: 1em;
+    color: #666;
 }

@@ -8,36 +8,66 @@
 </head>
 
 <body>
-    <!-- Menu Lateral -->
     <div class="menu-lateral">
         <h2>Rotina</h2>
         <ul>
             <li><a href="{{ url_for('index') }}">Calendário</a></li>
             <li><a href="{{ url_for('adicionar') }}" class="ativo">Adicionar Tarefa</a></li>
-            <li><a href="#">Opção Futura 1</a></li>
-            <li><a href="#">Opção Futura 2</a></li>
+            <li><a href="{{ url_for('pomodoro') }}">Pomodoro</a></li>
         </ul>
     </div>
 
-    <!-- Conteúdo Principal -->
     <div class="conteudo">
         <h1>Adicionar Nova Tarefa</h1>
-        <form method="POST" class="form-adicionar">
+        <form method="POST" class="form-adicionar" id="form-adicionar">
             <div class="form-grupo">
-                <label for="nome">Nome da Tarefa:</label>
-                <input type="text" id="nome" name="nome" required>
+                <label for="nome">Nome da Tarefa</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome da tarefa" required>
+            </div>
+            <div class="form-grupo form-row">
+                <div>
+                    <label for="data">Data</label>
+                    <input type="date" id="data" name="data" required>
+                </div>
+                <div>
+                    <label for="hora">Horário</label>
+                    <input type="time" id="hora" name="hora" required>
+                </div>
             </div>
             <div class="form-grupo">
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required>
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" name="prioridade">
+                    <option value="Alta">Alta</option>
+                    <option value="Média" selected>Média</option>
+                    <option value="Baixa">Baixa</option>
+                </select>
             </div>
             <div class="form-grupo">
-                <label for="hora">Horário:</label>
-                <input type="time" id="hora" name="hora" required>
+                <label for="notas">Notas</label>
+                <textarea id="notas" name="notas" placeholder="Adicione detalhes ou lembretes"></textarea>
             </div>
-            <button type="submit" class="btn">Adicionar</button>
+            <div class="form-grupo">
+                <label for="repetir">Repetir</label>
+                <select id="repetir" name="repetir">
+                    <option value="Não">Não repetir</option>
+                    <option value="Diária">Diária</option>
+                    <option value="Semanal">Semanal</option>
+                    <option value="Mensal">Mensal</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" id="btn-submit">Adicionar</button>
         </form>
     </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById("form-adicionar").addEventListener("submit", function (e) {
+            const btn = document.getElementById("btn-submit");
+            btn.classList.add("carregando");
+            btn.disabled = true;
+            btn.innerText = "Adicionando...";
+        });
+    </script>
 </body>
 
 </html>
